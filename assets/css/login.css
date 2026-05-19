@@ -1,0 +1,348 @@
+/* ============================================
+   kosin.id — Login Page | style.css
+   ============================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Poppins:wght@400;500;600;700;800&display=swap');
+
+/* ── RESET ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  /* brand palette (sampled from contoh) */
+  --sky-light   : #b8eaf8;
+  --sky-mid     : #7dd4ed;
+  --teal        : #3aaccc;
+  --teal-dark   : #1e8aaa;
+  --btn-bg      : #1d7d99;
+  --btn-hover   : #176c85;
+
+  /* form */
+  --card-bg     : #ffffff;
+  --panel-bg    : rgba(208, 242, 252, 0.55);
+  --input-bg    : #f5fbfe;
+  --input-bdr   : #cce9f6;
+  --label-color : #2d6070;
+  --placeholder : #a8ccd8;
+  --text-dark   : #1b3a48;
+  --text-sub    : #608898;
+
+  --shadow      : 0 16px 52px rgba(0,80,120,0.18), 0 2px 8px rgba(0,80,120,0.08);
+  --radius-card : 22px;
+  --radius-inp  : 10px;
+}
+
+html, body {
+  height: 90%;
+  font-family: 'Poppins', sans-serif;
+  background: var(--sky-mid);
+}
+
+/* ============================================
+   OUTER FRAME — dark rounded container
+   (matches the contoh screenshot border)
+   ============================================ */
+.frame {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 20px;
+  background: #111;          /* dark outer area visible in contoh */
+}
+
+/* ============================================
+   PAGE WRAPPER — the white-rounded card
+   ============================================ */
+.page {
+  display: flex;
+  width: 860px;
+  height: 500px;
+  margin-top: 5%;
+  margin-left: 17%;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 24px 72px rgba(0,0,0,0.38);
+}
+
+/* ============================================
+   LEFT PANEL — city background
+   ============================================ */
+.panel-left {
+  flex: 1.05;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* City background image */
+.panel-left .bg-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center bottom;
+  z-index: 0;
+}
+
+/* Soft teal tint overlay — matches the light blue in the contoh */
+.panel-left .bg-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(145,220,245,0.18) 0%,
+    rgba(50,145,175,0.22) 100%
+  );
+  z-index: 1;
+}
+
+/* ── Logo area (top-left) ── */
+.logo-block {
+  position: relative;
+  z-index: 10;
+  padding: 28px 28px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  margin-top: 5%;
+  
+}
+
+.logo-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* SVG-based logo icon (house + people) */
+img {
+  width: 60px;
+  height: 44px;
+  flex-shrink: 0;
+}
+
+.logo-wordmark {
+  font-family: 'Nunito', sans-serif;
+  font-size: 1.7rem;
+  font-weight: 800;
+  color: #1b4e62;
+  letter-spacing: -0.3px;
+}
+
+.logo-wordmark span {
+  color: #1a8aaa;
+}
+
+.logo-tagline {
+  font-family: 'Nunito', sans-serif;
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: #2d6a82;
+  letter-spacing: 0.5px;
+  margin-left: 12px;   /* align under text, past icon */
+}
+
+/* Horizontal divider line under logo */
+.logo-divider {
+  margin: 6px 0 0 54px;
+  width: 100px;
+  height: 1.5px;
+  background: linear-gradient(90deg, #2d8aaa 0%, transparent 100%);
+  opacity: 0.4;
+}
+
+/* ── Headline copy (bottom-left) ── */
+.copy-block {
+  position: absolute;
+  bottom: 32px;
+  left: 28px;
+  z-index: 10;
+  max-width: 280px;
+}
+
+.copy-headline {
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: #1b3d50;
+  line-height: 1.2;
+  letter-spacing: -0.5px;
+  text-shadow: 0 1px 6px rgba(255,255,255,0.4);
+}
+
+.copy-sub {
+  margin-top: 8px;
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: #2d5f75;
+  line-height: 1.5;
+}
+
+/* ============================================
+   RIGHT PANEL — login form
+   ============================================ */
+.panel-right {
+  width: 310px;
+  flex-shrink: 0;
+  background: var(--panel-bg);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border-left: 1px solid rgba(255,255,255,0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px 22px;
+}
+
+/* ── White card inside right panel ── */
+.card {
+  background: var(--card-bg);
+  border-radius: var(--radius-card);
+  padding: 28px 26px 26px;
+  width: 100%;
+  box-shadow: var(--shadow);
+}
+
+.card-title {
+  font-size: 1.22rem;
+  font-weight: 700;
+  color: var(--text-dark);
+  text-align: center;
+  letter-spacing: -0.2px;
+}
+
+.card-sub {
+  font-size: 0.72rem;
+  color: var(--text-sub);
+  text-align: left;
+  margin-top: 8px;
+  line-height: 1.5;
+  font-family: 'Nunito', sans-serif;
+}
+
+.Daftar a {
+  font-size: 0.68rem;
+  color: var(--teal-dark);
+  font-weight: 600;
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+
+
+/* ── Fields ── */
+.field {
+  margin-top: 14px;
+}
+
+.field label {
+  display: block;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--label-color);
+  margin-bottom: 5px;
+  letter-spacing: 0.2px;
+}
+
+.field input {
+  width: 100%;
+  background: var(--input-bg);
+  border: 1.5px solid var(--input-bdr);
+  border-radius: var(--radius-inp);
+  padding: 9px 12px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.75rem;
+  color: var(--text-dark);
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.field input::placeholder {
+  color: var(--placeholder);
+  font-size: 0.72rem;
+}
+
+.field input:focus {
+  border-color: var(--teal);
+  box-shadow: 0 0 0 3px rgba(58,172,204,0.14);
+}
+
+/* ── Forgot password ── */
+.forgot-row {
+  text-align: right;
+  margin-top: 6px;
+}
+
+.forgot-row a {
+  font-size: 0.68rem;
+  color: var(--teal-dark);
+  font-weight: 600;
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+
+.forgot-row a:hover { opacity: 0.7; }
+
+/* ── Masuk Button ── */
+.btn-masuk {
+  display: block;
+  width: 100%;
+  margin-top: 18px;
+  padding: 11px;
+  background: var(--btn-bg);
+  color: #fff;
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.88rem;
+  font-weight: 700;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  letter-spacing: 0.5px;
+  box-shadow: 0 5px 18px rgba(29,125,153,0.38);
+  transition: background 0.2s, transform 0.15s, box-shadow 0.15s;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-masuk::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(to bottom, rgba(255,255,255,0.12), transparent);
+  pointer-events: none;
+}
+
+.btn-masuk:hover {
+  background: var(--btn-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 8px 24px rgba(29,125,153,0.44);
+}
+
+.btn-masuk:active { transform: translateY(0); }
+
+/* ── Loading state ── */
+.btn-masuk:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* ============================================
+   ANIMATIONS
+   ============================================ */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.panel-left  { animation: fadeUp 0.7s ease both; }
+.panel-right { animation: fadeUp 0.7s 0.12s ease both; }
+
+/* ============================================
+   RESPONSIVE — mobile
+   ============================================ */
+@media (max-width: 700px) {
+  .frame { padding: 0; background: var(--sky-mid); }
+  .page  { width: 100%; height: 100vh; border-radius: 0; flex-direction: column; }
+  .panel-left  { display: none; }
+  .panel-right { width: 100%; flex: 1; border-left: none; }
+}
