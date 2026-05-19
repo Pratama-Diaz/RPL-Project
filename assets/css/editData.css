@@ -1,0 +1,270 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family: Arial, sans-serif;
+}
+
+body{
+    background:#f8f8f8;
+}
+
+.container{
+    display:flex;
+    min-height:100vh;
+}
+
+/* Sidebar */
+.sidebar{
+  width: 220px;
+  background: white;
+  border-right: 1px solid #d9d9d9;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  /* justify-content: space-between; */
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+.main-content{
+    flex:1;
+    margin-left:220px;
+    padding:25px 35px;
+    min-height:100vh;
+    position:relative;
+}
+
+.logo h1{
+  color:#065f63;
+  font-size:24px;
+  margin:0;
+}
+
+.logo p{
+    color:gray;
+    font-size:12px;
+    margin-top:5px;
+}
+
+.menu{
+  list-style: none;
+  margin-top: 2%;
+}
+
+.menu li{
+  margin-bottom: 12px;
+}
+
+.menu li a{
+  text-decoration: none;
+  color: #c0c0c0;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 16px;
+  border-radius: 10px;
+  font-size: 15px;
+  transition: 0.3s;
+}
+
+.menu li.active a{
+  background: #065f63;
+  color: white;
+}
+
+.menu li a:hover{
+  background: #065f63;
+  color: white;
+}
+
+.logout a{
+  text-decoration: none;
+  color: #065f63;
+  font-size: 22px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 240px;
+}
+
+/* Header */
+.header h1{
+    font-size:42px;
+    color:#111;
+}
+
+.header p{
+    color:gray;
+    margin-top:8px;
+}
+
+/* Topbar */
+.topbar{
+    display:flex;
+    justify-content:flex-end;
+    align-items:center;
+    gap:25px;
+    margin-bottom:25px;
+    padding: 0 30px;
+    height: 60px;
+    border-bottom: 1px solid #ccc;
+}
+
+.topbar i{
+    font-size:20px;
+    color:gray;
+}
+
+.topbar img{
+    width:45px;
+    height:45px;
+    border-radius:50%;
+}
+
+/* Main */
+.main-content{
+    flex:1;
+    padding:25px 35px;
+    position:relative;
+}
+
+.logo{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 40px;
+}
+
+.logo img{
+  width: 50px;
+}
+
+.logo h2{
+  color: #065f63;
+  font-size: 24px;
+}
+
+.logo p{
+  font-size: 11px;
+  color: #999;
+}
+.input-container .box{
+    background: #eeeeee;
+    color: #8a8a8a;
+    font-size: 22px;
+    font-weight: 600;
+    padding: 15px;
+    
+    display: flex;
+    justify-content: center;  /* bikin tulisan ke tengah */
+    align-items: center;
+}
+
+.input-container{
+    width: 460px;
+    background: white;
+    border: 2px solid #065f63;
+    border-radius: 12px;
+    overflow: hidden;
+    margin: 20px auto;
+    position: relative;
+}
+
+/* Judul bawaan form */
+.input-container::before{
+    content: "Form Edit";
+    display: block;
+    width: 100%;
+    background: #939393;
+    color: #474747;
+    text-align: center;
+    font-size: 22px;
+    font-weight: 600;
+    padding: 15px 0;
+    border-bottom: 2px solid #065f63;
+}
+/* FORM DETAIL */
+
+.content h1{
+    font-size: 35px;
+    margin-bottom: 5px;
+}
+
+.input-container{
+    width: 650px;
+    background: white;
+    border: 2px solid #065f63;
+    border-radius: 12px;
+    overflow: hidden;
+    margin: 20px auto;
+}
+.input-container .box{
+    background: #eeeeee;
+    color: #8a8a8a;
+    text-align: center;
+    font-size: 22px;
+    font-weight: 600;
+    padding: 15px;
+    width: 100%;
+}
+
+.input-container form{
+    padding: 20px 30px;
+}
+
+.input-container label{
+    display: block;
+    margin-top: 15px;
+    margin-bottom: 8px;
+    color: #8a8a8a;
+    font-size: 18px;
+}
+
+.input-container input{
+    width: 100%;
+    padding: 14px;
+    border: 2px solid #065f63;
+    border-radius: 12px;
+    outline: none;
+    font-size: 15px;
+}
+.bukti{
+    width: 100%;
+    min-height: 160px;
+    border: 2px solid #065f63;
+    border-radius: 12px;
+    padding: 20px;
+    text-align: center;
+    margin-top: 10px;
+}
+
+.bukti img{
+    width: 100px;
+    display: none;
+    margin: auto;
+    border-radius: 6px;
+}
+.btn{
+    text-align: center;
+    margin-top: 25px;
+}
+
+.btn button{
+    width: 180px;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    background-color: #065f63;
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.btn button:hover{
+    background-color: #04494c;
+}

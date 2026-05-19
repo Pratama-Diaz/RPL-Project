@@ -69,4 +69,14 @@ function dataUser($id_user){
   $user = $stmnt->fetch(PDO::FETCH_ASSOC);
   return $user;
 }
+
+// untuk pemkost
+function dataPemkost($id_pemkost){
+  global $DBH;
+  $stmnt = $DBH->prepare("SELECT * FROM pemkost WHERE id_pemkost = :id_pemkost");
+  $stmnt->execute([':id_pemkost' => $id_pemkost]);
+  $pemkost = $stmnt->fetch(PDO::FETCH_ASSOC);
+  return $pemkost;
+}
+
 ?>
