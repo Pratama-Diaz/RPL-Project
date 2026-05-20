@@ -5,7 +5,63 @@ if (session_status() === PHP_SESSION_NONE){
 require_once('../base.php');
 require_once (BASE_PATH . '/function.php');
 
+$kost = getAllDataKost($_GET['id_kost']);
+$namaKost = $harga = $lokasi ='';
+$error_namaKost = $error_harga= $error_lokasi =$error_gambar ='';
+if ($_SERVER['REQUEST_METHOD'] == "POST") {
+    $namaKost = $_POST['namaKost'];
+    $harga = $_POST['harga'];
+    $lokasi = $_POST['lokasi'];
 
+    if (isset($_POST['btn'])) {
+      if ($_POST['btn']=='simpan') {
+        $answer = TRUE;
+        if(!empty($_FILES['cover']['name'])){
+          if(!validasiGambar($_FILES['cover'])){
+            $error_cover ="Tipe file tidak valid! Hanya boleh JPG, JPEG, PNG, WEBP.";
+            $answer = FALSE;
+          }
+        }
+    
+        if(!wajib_isi($namaKost)){
+          $error_namaKost = 'Wajib di isi';
+          $succses = FALSE;
+        }elseif(!Alfanumerik($namaKost)){
+          $error_namaKost = 'Judul Tidak Valid';
+          $succses = FALSE;
+          $namaKost = '';
+        }
+                
+        if(!wajib_isi($harga)){
+          $succses = FALSE;
+          $error_harga = "Wajib di isi";
+        }elseif(!harga($harga)){
+          $error_harga = "Harga berupa numerik";
+          $succses = FALSE;
+          $harga = '';
+        }
+
+        if(!wajib_isi($lokasi)){
+          $succses = FALSE;
+          $error_lokasi = "Wajib di isi";
+        }elseif(!Lokasi($lokasi)){
+          $error_lokasi = "lokasi berupa alfabet";
+          $succses = FALSE;
+          $lokasi = '';
+        }
+                      
+        if ($answer == TRUE) {
+          if (!empty($_FILES['gambar_kost']['name'])) {
+            editGambar($_GET['id_kost']);
+          }
+            editDataKost($_GET['id_kost'],$_POST);
+            header('location:'.BASE_URL.'/pemkost/dataKost.php');
+          }  
+      }elseif($_POST['btn'] == 'kembali'){
+        header('location:'.BASE_URL.'/pemkost/dataKost.php');
+      }
+    }
+  }
 ?>
 <!DOCTYPE html>
 <html lang="id">
@@ -17,7 +73,7 @@ require_once (BASE_PATH . '/function.php');
   <link rel="stylesheet"
   href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
-  <link rel="stylesheet" href="<?= BASE_URL . '/assets/css/editData.css' ?>">
+  <link rel="stylesheet" href="<?= BASE_URL . '/assets/css/tambahData.css' ?>">
 </head>
 <body>
 
@@ -49,7 +105,7 @@ require_once (BASE_PATH . '/function.php');
         </li>
 
         <li>
-          <a href="<?= BASE_URL . '/pemkost/profil.php' ?>">
+          <a href="<?= BASE_URL . '/pemkost/profilPem.php' ?>">
             <i class="fa-solid fa-user"></i>
             Profil
           </a>
@@ -63,37 +119,62 @@ require_once (BASE_PATH . '/function.php');
 
   <!-- Main -->
   <main class="main-content">
-        <!-- Topbar -->
-        <div class="topbar">
-        <i class="far fa-bell"></i>
-        <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="profile">
-        </div>
-        <div class="header">
-        <h1>Edit</h1>
+    <div class="header">
+      <h1>Edit</h1>
         <p>Perbarui dan kelola data kos anda di sini.</p>
-        </div>
+    </div>
 
-        <div class="input-container">
-            <form action="<?= BASE_URL.'/pemkost/editprofil.php'?>" method="POST" enctype="multipart/form-data">
-                <label for="id">Nama:</label>
-                <input type="text">
+    <div class="input-container">
+      <form method="POST" enctype="multipart/form-data">
+        <label>Nama:</label>
+        <input type="text" name="namaKost" value="<?=$namaKost?>">
+        <div class="error"><?=$error_namaKost?></div>
 
-                <label for="nama">Harga:</label>
-                <input type="text">
+      <label>Harga:</label>
+      <input type="text" name="harga" value="<?=$harga?>">
+      <div class="error"><?=$error_harga?></div>
 
-                <label for="no">Lokasi:</label>
-                <input type="text">
+      <label>Periode:</label>
+      <select name="periode">
+        <option value="pilih">-----Pilih-----</option>
+        <option value="bulan">Bulan</option>
+        <option value="tahun">Tahun</option>
+        <option value="minggu">Minggu</option>
+      </select>
 
-                <label for="bukti">Gambar:</label>
-                <div class="bukti">
-                    <img src="" alt="">
-                </div>
+      <label>Lokasi:</label>
+      <input type="text" name="lokasi" value="<?=$lokasi?>">
+      <div class="error"><?=$error_lokasi?></div>
 
-                <div class="btn">
-                    <button type="submit">Simpan</button>
-                </div>
-            </form>
-        </div>
+      <label>Fasilitas:</label>
+      <div class="fasilitas-box">
+      <label>
+        <input type="checkbox" name="fasilitas[]" value="WiFi">WiFi
+      </label>
+      <label>                   
+        <input type="checkbox" name="fasilitas[]" value="AC">AC
+      </label>
+      <label>
+        <input type="checkbox" name="fasilitas[]" value="Dapur">Dapur Bersama
+      </label>
+      <label>
+        <input type="checkbox" name="fasilitas[]" value="Kamar Mandi Dalam">Kamar Mandi Dalam
+      </label>
+      <label>
+        <input type="checkbox" name="fasilitas[]" value="Parkir">Parkir
+      </label>
+      </div>
+
+      <label>Gambar:</label>
+        <input type="file" name="gambar_kost">
+      <div class="error"><?=$error_gambar?></div>
+
+      <div class="btn">
+        <button type="submit" name="btn" value="simpan">Simpan</button>
+        <button name="btn" value='kembali'>Batal</button>
+      </div>
+    </form>
+  </div> 
   </main>
 
 </div>

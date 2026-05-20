@@ -98,29 +98,6 @@ body{
     position:relative;
 }
 
-/* Topbar */
-.topbar{
-    display:flex;
-    justify-content:flex-end;
-    align-items:center;
-    gap:25px;
-    margin-bottom:25px;
-    padding: 0 30px;
-    height: 60px;
-    border-bottom: 1px solid #ccc;
-}
-
-.topbar i{
-    font-size:20px;
-    color:gray;
-}
-
-.topbar img{
-    width:45px;
-    height:45px;
-    border-radius:50%;
-}
-
 /* Header */
 .header h1{
     font-size:42px;
@@ -135,44 +112,48 @@ body{
 /* Cards */
 .card-container{
     display:flex;
-    gap:30px;
-    margin-top:30px;
     flex-wrap:wrap;
+    gap:25px;
+    margin-top:30px;
 }
-
 .kost-card{
-    width:240px;
+    width:300px;
     background:white;
     border:1px solid #0b6b6b;
     border-radius:15px;
     overflow:hidden;
-    box-shadow:0 3px 8px rgba(0,0,0,0.05);
+    box-shadow:0 3px 8px rgba(0,0,0,0.08);
 }
 
 .kost-card img{
     width:100%;
-    height:160px;
+    height:180px;
     object-fit:cover;
+    display:block;
 }
 
 .card-body{
-    padding:15px;
+    padding:20px;
 }
-
 .card-body h3{
-    font-size:18px;
-    margin-bottom:8px;
+    font-size:20px;
+    margin-bottom:10px;
+    color:#111;
 }
 
 .card-body p{
     color:gray;
-    font-size:13px;
-    margin-bottom:10px;
+    font-size:14px;
+    margin-bottom:12px;
+    display:flex;
+    align-items:center;
+    gap:6px;
 }
 
 .card-body h4{
-    color:#111;
+    color:#065f63;
     margin-bottom:15px;
+    font-size:20px;
 }
 
 .card-body h4 span{
@@ -181,19 +162,43 @@ body{
     font-weight:normal;
 }
 
+/* fasilitas */
 .facility{
     display:flex;
-    gap:20px;
-    color:gray;
-    font-size:13px;
+    flex-wrap:wrap;
+    gap:10px;
     margin-bottom:15px;
 }
 
-.rating{
-    display:flex;
-    justify-content:space-between;
-    color:gray;
-    font-size:13px;
+.facility span{
+    background:#e7f3f3;
+    color:#065f63;
+    padding:6px 12px;
+    border-radius:20px;
+    font-size:12px;
+    font-weight:600;
+}
+
+/* button tambah */
+.add-btn{
+    position:fixed;
+    right:30px;
+    bottom:30px;
+    width:60px;
+    height:60px;
+    border:none;
+    border-radius:50%;
+    background:#065f63;
+    color:white;
+    font-size:24px;
+    cursor:pointer;
+    box-shadow:0 4px 10px rgba(0,0,0,0.2);
+    transition:0.3s;
+}
+
+.add-btn:hover{
+    background:#04494c;
+    transform:scale(1.05);
 }
 
 /* Floating button */
@@ -229,4 +234,152 @@ body{
 .logo p{
   font-size: 11px;
   color: #999;
+}
+
+.input-container .box{
+    background: #eeeeee;
+    color: #8a8a8a;
+    font-size: 22px;
+    font-weight: 600;
+    padding: 15px;
+    
+    display: flex;
+    justify-content: center;  /* bikin tulisan ke tengah */
+    align-items: center;
+}
+
+.input-container{
+    width: 460px;
+    background: white;
+    border: 2px solid #065f63;
+    border-radius: 12px;
+    overflow: hidden;
+    margin: 20px auto;
+    position: relative;
+}
+
+/* Judul bawaan form  edit data*/
+.input-container::before{
+    content: "Form Edit";
+    display: block;
+    width: 100%;
+    background: #939393;
+    color: #474747;
+    text-align: center;
+    font-size: 22px;
+    font-weight: 600;
+    padding: 15px 0;
+    border-bottom: 2px solid #065f63;
+}
+/* FORM DETAIL */
+
+.content h1{
+    font-size: 35px;
+    margin-bottom: 5px;
+}
+
+.input-container{
+    width: 650px;
+    background: white;
+    border: 2px solid #065f63;
+    border-radius: 12px;
+    overflow: hidden;
+    margin: 20px auto;
+}
+.input-container .box{
+    background: #eeeeee;
+    color: #8a8a8a;
+    text-align: center;
+    font-size: 22px;
+    font-weight: 600;
+    padding: 15px;
+    width: 100%;
+}
+
+.input-container form{
+    padding: 20px 30px;
+}
+
+.input-container label{
+    display: block;
+    margin-top: 15px;
+    margin-bottom: 8px;
+    color: #8a8a8a;
+    font-size: 18px;
+}
+
+.input-container input{
+    width: 100%;
+    padding: 14px;
+    border: 2px solid #065f63;
+    border-radius: 12px;
+    outline: none;
+    font-size: 15px;
+}
+.bukti{
+    width: 100%;
+    min-height: 160px;
+    border: 2px solid #065f63;
+    border-radius: 12px;
+    padding: 20px;
+    text-align: center;
+    margin-top: 10px;
+}
+
+.bukti img{
+    width: 100px;
+    display: none;
+    margin: auto;
+    border-radius: 6px;
+}
+.btn{
+    text-align: center;
+    margin-top: 25px;
+}
+
+.btn button{
+    width: 180px;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    background-color: #065f63;
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.btn button:hover{
+    background-color: #04494c;
+}
+
+.container-validasi {
+    background: white;
+    padding: 25px 35px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,50,0.1);
+    text-align: center;
+    justify-content: center;
+    width: 300px;
+}
+
+.container-validasi h1 {
+    color: #1a4dab;
+    margin-bottom: 20px;
+}
+
+.container-validasi form button {
+    padding: 10px 25px;
+    margin: 5px;
+    font-size: 16px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+}
+.btn-kost{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 30px;
 }

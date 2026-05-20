@@ -102,21 +102,6 @@ body{
   margin-left: 220px;
 }
 
-.topbar{
-    height: 80px;
-    border-bottom: 1px solid #ccc;
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    padding: 0 30px;
-    gap: 25px;
-}
-
-.topbar i{
-    font-size: 24px;
-    color: #7a7a7a;
-}
-
 .profile img{
     width: 60px;
     height: 45px;

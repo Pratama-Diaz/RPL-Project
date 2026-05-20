@@ -4,6 +4,7 @@
     }
     require_once('../base.php');
     require_once (BASE_PATH . '/function.php');
+    require_once (BASE_PATH . '/validasi.php');
 
     $idPemkost = $_SESSION['id_pemkost'];
     $dataPemkost = dataPemkost($idPemkost);
@@ -21,30 +22,18 @@
         if ($btn == 'simpan') {
             $succses = TRUE;
             
-           if(!empty($_FILES['cover']['name'])){
-                if(!validasiGambar($_FILES['cover'])){
-                    $error_cover ="Tipe file tidak valid! Hanya boleh JPG, JPEG, PNG, WEBP.";
-                    $answer = FALSE;
-                }
+           if(!validasiGambar($_FILES['profil'])){
+                $error_profil ="Tipe file tidak valid!";
+                $succses = FALSE;
             }
             
-            if(!wajib_isi($nama)){
-                $error_nama = 'nama wajib di isi';
+            if(!wajib_isi($username)){
+                $error_username = 'Username wajib di isi';
                 $succses = FALSE;
-            }elseif(!minusn($nama)){
-                $error_nama = 'nama minimal 3 karakter';
+            }elseif(!Alfabet($username)){
+                $error_username = 'username hanya alfabet';
                 $succses = FALSE;
-                $nama = '';
-            }elseif(!Alfanumerik($nama)){
-                $error_nama = 'nama hanya karakter';
-                $succses = FALSE;
-                $nama = '';
-            }elseif ($nama !== $_SESSION['nama']) {
-                if (ceknamaPemustaka($_POST)) {
-                    $error_nama = 'nama sudah digunakan!';
-                    $succses = FALSE;
-                    $nama = '';
-                }
+                $username = '';
             }
             
             //validasi email
@@ -79,13 +68,13 @@
             
             if($succses == TRUE){
                 if (!empty($_FILES['profil']['name'])) {
-                    updateProfile($idUser);
+                    updateProfile($idPemkost);
                 }
-                updateUser($idUser, $_POST);
-                header('location:'.BASE_URL.'/pemkost/profile.php');
+                updatePemkost($idPemkost, $_POST);
+                header('location:'.BASE_URL.'/pemkost/profilePem.php');
             }
         }elseif ($btn == 'batal') {
-            header('location:'.BASE_URL.'/pemkost/profile.php');
+            header('location:'.BASE_URL.'/pemkost/profilePem.php');
         }
     };
 
@@ -131,7 +120,7 @@
         </li>
 
         <li class="active">
-          <a href="<?= BASE_URL . '/pemkost/Profil.php' ?>">
+          <a href="<?= BASE_URL . '/pemkost/profilPem.php' ?>">
             <i class="fa-solid fa-user"></i>
             Profil
           </a>
@@ -145,50 +134,55 @@
 
   <!-- Main -->
   <main class="main-content">
-        <!-- Topbar -->
-        <div class="topbar">
-        <i class="far fa-bell"></i>
-            <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="profile">
-        </div>
         <div class="header">
-        <h1>Edit Profil</h1>
-        <p>Perbarui profil Anda di sini.</p>
+            <h1>Edit Profil</h1>
+            <p>Perbarui profil Anda di sini.</p>
         </div>
 
         <div class="input-container">
             <form action="<?= BASE_URL.'/pemkost/editProfil.php'?>" method="POST" enctype="multipart/form-data">
 
                 <label>Photo Profil:</label>
-                <input type="file" name="profil">
+                <input type="file" name="profil" value="<?= $dataPemkost['gambar_pemkost']; ?>">
                 <p class="error"><?= $error_profil?></p>
 
                 <label>Username:</label>
-                <input type="text" name="username">
+                <input type="text" name="username" value="<?= $dataPemkost['username_pemkost']; ?>">
                 <p class="error"><?= $error_username?></p>
 
                 <label>Email:</label>
-                <input type="email" name="email">
+                <input type="email" name="email" value="<?= $dataPemkost['email_pemkost']; ?>">
                 <p class="error"><?= $error_email?></p>
 
                 <label>No. Telephone:</label>
-                <input type="text" name="no">
+               <input type="text" name="no" value="<?= $dataPemkost['telepon_pemkost']; ?>">
                 <p class="error"><?= $error_no?></p>
 
-                <label>Gender:</label>
-                <select name="jenis">
-                  <option value="pilih">-----Pilih-----</option>
-                  <option value="perempuan">Perempuan</option>
-                  <option value="laki">Laki-Laki</option>
-                </select>
-                <p class="error"><?= $error_jenis?></p>
+               <label>Gender:</label>
+                    <select name="gender">
+                        <option value="pilih">-----Pilih-----</option>
+
+                        <option value="perempuan"
+                        <?= ($dataPemkost['gender_pemkost'] == 'perempuan') ? 'selected' : ''; ?>>
+                        Perempuan
+                        </option>
+
+                        <option value="laki"
+                        <?= ($dataPemkost['gender_pemkost'] == 'laki') ? 'selected' : ''; ?>>
+                        Laki-Laki
+                        </option>
+                    </select>
+
+                    <p class="error"><?= $error_gender ?></p>
 
                 <label>Password:</label>
-                <input type="password" name="pass">
+                <input type="password" name="pass" value="<?= $dataPemkost['password_pemkost']; ?>">
                 <p class="error"><?= $error_pass?></p>
             
 
                 <div class="btn">
-                    <button type="submit" name="btn">Simpan</button>
+                    <button type="submit" name="btn" value="simpan">Simpan</button>
+                    <button type="submit" name="btn" value="batal">Batal</button>
                 </div>
             </form>
         </div>

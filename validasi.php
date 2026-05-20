@@ -32,8 +32,8 @@ function Alfanumerik($data){
     return preg_match("/^[\w \s]+$/",$data);
 }
 
-// validasi alamat
-function Alamat($data){
+// validasi Lokasi
+function Lokasi($data){
     return preg_match("/^[a-zA-Z0-9\s,\.\/-]{2,100}$/",$data);
 }
 
@@ -52,26 +52,9 @@ function minusn($data){
     return strlen($data) >= 3;
 }
 
-// validasi tanggal lahir
-function tanggal($tahun, $bulan, $tanggal){
-    if (!Numerik($tahun) or !Numerik($tahun) or !Numerik($tahun)) {
-        return FALSE;
-    }else {     
-        $tanggal_lahir = mktime(0,0,0, $bulan, $tanggal, $tahun);
-        $tahun_skrg = date('Y');
-    
-        if ($tahun_skrg - $tahun >= 8 and $tahun_skrg - $tahun <= 40){
-            return TRUE;
-        }else{
-            return FALSE;
-        }
-    }
-
-}
-
-// validasi stok buku
-function stok($data){
-    return $data <= 5;
+//validasi harga
+function harga($data){
+    return preg_match("/^[0-9.,]+$/", $data);
 }
 
 // validasi tahun terbit buku

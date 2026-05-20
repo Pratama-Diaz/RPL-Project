@@ -5,6 +5,8 @@ if (session_status() === PHP_SESSION_NONE){
 require_once('../base.php');
 require_once (BASE_PATH . '/function.php');
 
+$dataKost = getAllDataKost();
+
 
 ?>
 <!DOCTYPE html>
@@ -22,39 +24,38 @@ require_once (BASE_PATH . '/function.php');
 <body>
 
 <div class="container">
-
   <!-- Sidebar -->
   <aside class="sidebar">
-     <div class="logo">
-        <img src="<?= BASE_URL . '/assets/img/logo 2.png' ?>" alt="logo">
-        <div>
-            <h1>kosin.id</h1>
-            <p>Cari Kost, Tinggal Nyaman</p>
-        </div>
+    <div class="logo">
+    <img src="<?= BASE_URL . '/assets/img/logo 2.png' ?>" alt="logo">
+      <div>
+        <h1>kosin.id</h1>
+        <p>Cari Kost, Tinggal Nyaman</p>
       </div>
+    </div>
     
     <ul class="menu">
-        <li class="active">
-        <a href="<?= BASE_URL . '/pemkost/dataKost.php' ?>">
-            <i class="fas fa-clipboard-list"></i>
-            Data Kost
-          </a>
-        </li>
+      <li class="active">
+      <a href="<?= BASE_URL . '/pemkost/dataKost.php' ?>">
+        <i class="fas fa-clipboard-list"></i>
+        Data Kost
+        </a>
+      </li>
 
-        <li class="#">
-        <a href="<?= BASE_URL . '/pemkost/dataPenyewa.php' ?>">
-            <i class="fas fa-users"></i>
-            Data Penyewa
+      <li class="#">
+      <a href="<?= BASE_URL . '/pemkost/dataPenyewa.php' ?>">
+        <i class="fas fa-users"></i>
+          Data Penyewa
           </a>
-        </li>
+      </li>
 
-        <li>
-            <a href="<?= BASE_URL . '/pemkost/profil.php' ?>">
-            <i class="fa-solid fa-user"></i>
-            Profil
-          </a>
-        </li>
-      </ul>
+      <li>
+        <a href="<?= BASE_URL . '/pemkost/profilPem.php' ?>">
+        <i class="fa-solid fa-user"></i>
+          Profil
+        </a>
+      </li>
+    </ul>
 
     <div class="logout">
       <a href="#"><i class="fas fa-sign-out-alt"></i> Keluar</a>
@@ -64,83 +65,46 @@ require_once (BASE_PATH . '/function.php');
   <!-- Main -->
   <main class="main-content">
 
-    <!-- Topbar -->
-    <div class="topbar">
-      <i class="far fa-bell"></i>
-      <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="profile">
-    </div>
-
-    <!-- Header -->
-    <div class="header">
-      <h1>Data Kost</h1>
-      <p>Kelola dan pantau seluruh aset kost Anda dengan mudah.</p>
-    </div>
-
-    <!-- Cards -->
-    <div class="card-container">
-
+  <!-- Header -->
+  <div class="header">
+    <h1>Data Kost</h1>
+    <p>Kelola dan pantau seluruh aset kost Anda dengan mudah.</p>
+  </div>
+  <!-- Cards -->
+  <div class="card-container">
+    <?php foreach($dataKost as $kost): ?>
       <div class="kost-card">
-        <img src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85" alt="">
+        <img src="<?= BASE_URL . '/assets/img/' . $kost['gambar_kost']; ?>" alt="">
+
         <div class="card-body">
-          <h3>Kost Putri UTM 1</h3>
-          <p><i class="fas fa-map-marker-alt"></i> Jl. Raya Telang, Kamal</p>
-          <h4>Rp 1.200.000 <span>/ bulan</span></h4>
-
+          <h3><?= $kost['nama_kost']; ?></h3>
+            <p>
+              <i class="fas fa-map-marker-alt"></i> <?= $kost['lokasi']; ?>
+            </p>
+          <h4>Rp <?= number_format($kost['harga']); ?>
+            <span>/ <?= $kost['periode']; ?></span>
+          </h4>  
           <div class="facility">
-            <span>📶 Wi-Fi</span>
-            <span>❄ AC</span>
-          </div>
-
-          <div class="rating">
-            ⭐ 4.6 (24)
-            <span>450m</span>
+            <?php
+              $fasilitas = !empty($kost['fasilitas'])
+              ? explode(',', $kost['fasilitas']): [];
+              foreach($fasilitas as $item):
+            ?>
+            <span><?= trim($item); ?></span>
+            <?php endforeach; ?>
+            <div class="btn-kost">
+              <a href="<?=BASE_URL.'/pemkost/deleteData.php'?>?id_kost=<?= $kost['id_kost']?>" class="btn-hapus">Hapus</a>
+              <a href="<?=BASE_URL.'/pemkost/editData.php'?>?id_kost=<?= $kost['id_kost']?>" class="btn-edit">Edit</a>
+            </div>
           </div>
         </div>
+
       </div>
-
-      <div class="kost-card">
-        <img src="https://images.unsplash.com/photo-1502672260266-1c1ef2d93688" alt="">
-        <div class="card-body">
-          <h3>Kost Putri UTM 2</h3>
-          <p><i class="fas fa-map-marker-alt"></i> Jl. Raya Telang, Kamal</p>
-          <h4>Rp 1.400.000 <span>/ bulan</span></h4>
-
-          <div class="facility">
-            <span>📶 Wi-Fi</span>
-            <span>❄ AC</span>
-          </div>
-
-          <div class="rating">
-            ⭐ 4.6 (24)
-            <span>450m</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="kost-card">
-        <img src="https://images.unsplash.com/photo-1484154218962-a197022b5858" alt="">
-        <div class="card-body">
-          <h3>Kost Putri UTM 3</h3>
-          <p><i class="fas fa-map-marker-alt"></i> Jl. Raya Telang, Kamal</p>
-          <h4>Rp 1.000.000 <span>/ bulan</span></h4>
-
-          <div class="facility">
-            <span>📶 Wi-Fi</span>
-            <span>❄ AC</span>
-          </div>
-
-          <div class="rating">
-            ⭐ 4.6 (24)
-            <span>450m</span>
-          </div>
-        </div>
-      </div>
-
-    </div>
-
+    <?php endforeach; ?>
+  </div>
     <!-- Floating Button -->
-    <button class="add-btn">
-      <i class="fas fa-plus" onclick="window.location.href='tambahData.html'"></i>
+    <button class="add-btn"onclick="window.location.href='tambahData.php'">
+      <i class="fas fa-plus"></i>
     </button>
 
   </main>

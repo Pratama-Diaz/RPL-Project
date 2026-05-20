@@ -49,7 +49,7 @@ require_once (BASE_PATH . '/function.php');
         </li>
 
         <li>
-          <a href="<?= BASE_URL . '/pemkost/profil.php' ?>">
+          <a href="<?= BASE_URL . '/pemkost/profilPem.php' ?>">
             <i class="fa-solid fa-user"></i>
             Profil
           </a>
@@ -63,15 +63,6 @@ require_once (BASE_PATH . '/function.php');
 
     <!-- MAIN CONTENT -->
     <main class="main-content">
-
-      <!-- TOPBAR -->
-      <div class="topbar">
-        <i class="fa-regular fa-bell"></i>
-
-        <div class="profile">
-          <img src="/media/profile.png" alt="profile">
-        </div>
-      </div>
 
       <!-- CONTENT -->
       <div class="content">

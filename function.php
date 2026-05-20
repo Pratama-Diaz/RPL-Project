@@ -79,4 +79,127 @@ function dataPemkost($id_pemkost){
   return $pemkost;
 }
 
+// Untuk mengedit biodata pemkost di edit profile pemkost
+function updatePemkost(int $id, array $data) {
+	$stmnt = DBH->prepare('UPDATE pemkost SET Username_Pemkost = :username_pemkost, Email_Pemkost = :email_pemkost, Telepon_Pemkost = :telepon_pemkost,Gender_Pemkost = :gender_pemkost,Password_Pemkost = :password_pemkostWHERE id_pemkost = :id_user');
+	$stmnt->execute([
+		':username_pemkost' => $data['username'],
+		':email_pemkost' => $data['email'],
+    ':telepon_pemkost' => $data['no'],
+    ':gender_pemkost' => $data['gender'],
+    ':password_pemkost' => $data['pass'],
+		':id_user'=>$id,
+	]);
+}
+
+//untuk mengupdate foto profile pemkost
+function updateProfile(int $id){
+	#menghapus foto sebelumnya
+	$profil = DBH->prepare('SELECT Profil FROM pemkost WHERE id_pemkost = :id');
+	$profil->execute([
+		':id' => $id
+	]);
+	$user = $profil->fetch();
+	if(!empty($user['gambar_pemkost']) && file_exists(BASE_PATH."/assets/img/".$user['gambar_pemkost'])){
+		unlink(BASE_PATH."/assets/img/".$user['gambar_pemkost']);
+	}
+
+
+	#menambahkan foto baru
+	$namaFile = time() . "_" . $_FILES['profil']['name'];
+	$tmpFile = $_FILES['profil']['tmp_name'];
+	$_SESSION['foto_profile'] = $namaFile;
+
+	move_uploaded_file($tmpFile, BASE_PATH."/assets/img/" . $namaFile);
+	$query = DBH->prepare("UPDATE pemkost SET Profil = :profil WHERE id_pemkost = :id");
+	$query->execute([
+		':profil' => $namaFile,
+		':id' => $id
+	]);
+}
+
+function getAllDataKost(){
+    global $DBH;
+    $stmt = $DBH->prepare("SELECT * FROM tambah_dataKost");
+    $stmt->execute();
+    $kost = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    return $kost;
+}
+
+// Dipakai di tambah data untuk menambah data kost baru
+function addDataKost(array $data){
+  global $DBH;
+  $stmt = $DBH->prepare("
+    INSERT INTO tambah_dataKost(nama_kost, harga, periode, lokasi, fasilitas, gambar_kost)VALUE(:Nama_Kost, :Harga, :Periode, :Lokasi, :Fasilitas, :Gambar_Kost)");
+    $namaFile = time() . "_" . $_FILES['gambar_kost']['name'];
+    $tmpFile = $_FILES['gambar_kost']['tmp_name'];
+    $fasilitas = isset($data['fasilitas'])
+      ? implode(', ', $data['fasilitas'])
+      : '';
+
+    $stmt->execute([
+      ':Nama_Kost' => $data['namaKost'],
+      ':Harga' => $data['harga'],
+      ':Periode' => $data['periode'],
+      ':Lokasi' => $data['lokasi'],
+      ':Fasilitas' => $fasilitas,
+      ':Gambar_Kost' => $namaFile,
+    ]);
+    move_uploaded_file(
+        $tmpFile,BASE_PATH . "/assets/img/" . $namaFile
+    );
+}
+
+// Dipakai untuk menghapus data kost
+function deleteKost(int $id){
+	global $DBH;
+	$gambar = $DBH->prepare('SELECT gambar_kost FROM tambah_dataKost WHERE id_kost = :id');
+	$gambar->execute([
+    ':id' => $id
+	]);
+	$kost = $gambar->fetch(PDO::FETCH_ASSOC);
+	if(!empty($kost['gambar_kost'])){
+		unlink(BASE_PATH."/assets/img/".$kost['gambar_kost']);
+	}
+	$stmnt = $DBH->prepare('DELETE FROM tambah_dataKost WHERE id_kost = :id');
+	$stmnt->execute([
+		':id' => $id
+	]);
+}
+
+// untuk mengedit data kost
+function editDataKost(int $id, array $data) {
+	$stmnt = DBH->prepare("UPDATE tambah_dataKost  SET Nama_Kost = :nama_kost, Harga = :harga, Periode = :periode, Lokasi = :lokasi, Fasilitas = :fasilitas WHERE ID_Kost = :id_kost");
+	$stmnt->execute([
+		':Nama_Kost' => $data['nama_kost'],
+		':Harga' => $data['harga'],
+    ':Periode' => $data['periode'],
+    ':Lokasi' => $data['lokasi'],
+		':Fasilitas' => $data['fasilitas'],
+		':id_Kost' => $id,
+	]);
+}
+
+// untuk mengubah gambar kost
+function editGambar(int $id){
+	#menghapus foto sebelumnya
+	$gambar = DBH->prepare('SELECT gambar_kost FROM buku WHERE id_kost = :id');
+	$gambar->execute([
+		':id' => $id
+	]);
+	$kost = $gambar->fetch();
+	unlink(BASE_PATH."/assets/img/".$kost['gambar_kost']);
+
+	#menambahkan foto baru
+	$namaFile = time() . "_" . $_FILES['gambar_kost']['name'];
+	$tmpFile = $_FILES['gambar_kost']['tmp_name'];
+
+	move_uploaded_file($tmpFile, BASE_PATH."/assets/img/" . $namaFile);
+	$query = DBH->prepare("UPDATE tambah_datakost SET Gambar_Kost = :gambar_kost WHERE id_kost = :id");
+	$query->execute([
+		':gambar_kost' => $namaFile,
+		':id' => $id
+	]);
+}
+
 ?>

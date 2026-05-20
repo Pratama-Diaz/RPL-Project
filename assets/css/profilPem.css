@@ -102,34 +102,12 @@ body{
     margin-top:8px;
 }
 
-/* Topbar */
-.topbar{
-    display:flex;
-    justify-content:flex-end;
-    align-items:center;
-    gap:25px;
-    margin-bottom:25px;
-    padding: 0 30px;
-    height: 60px;
-    border-bottom: 1px solid #ccc;
-}
-
-.topbar i{
-    font-size:20px;
-    color:gray;
-}
-
-.topbar img{
-    width:45px;
-    height:45px;
-    border-radius:50%;
-}
 
 /* Main */
 .main-content{
-    flex:1;
     padding:25px 35px;
     position:relative;
+    /* width: 100px; */
 }
 
 .logo{
@@ -152,108 +130,83 @@ body{
   font-size: 11px;
   color: #999;
 }
-.input-container .box{
-    background: #eeeeee;
-    color: #8a8a8a;
-    font-size: 22px;
-    font-weight: 600;
-    padding: 15px;
-    
-    display: flex;
-    justify-content: center;  /* bikin tulisan ke tengah */
-    align-items: center;
+.box{
+    text-align: center;
+    margin-bottom: 20px;
+}
+.box img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 20px;
+    border: 3px solid #00565a;
+}
+.image {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 20px;
+    border: 3px solid #00565a;
+    text-align: center;
 }
 
-.input-container{
-    width: 460px;
+.box-biodata {
+    width: 420px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    padding: 30px;
+    text-align: center;
+    align-items: center;
+    padding: 15px;
     background: white;
     border: 2px solid #065f63;
-    border-radius: 12px;
     overflow: hidden;
     margin: 20px auto;
     position: relative;
 }
-
-/* Judul bawaan form */
-.input-container::before{
-    content: "Form Edit";
-    display: block;
-    width: 100%;
-    background: #939393;
-    color: #474747;
-    text-align: center;
-    font-size: 22px;
-    font-weight: 600;
-    padding: 15px 0;
-    border-bottom: 2px solid #065f63;
+.biodata{
+    width: 360px;              
+    background-color: #94c2c4;
+    color: rgb(63, 63, 63);
+    text-align: left;
+    padding: 12px 20px;
+    margin: 15px auto;         
+    border-radius: 10px;       
 }
-/* FORM DETAIL */
-
-.content h1{
-    font-size: 35px;
-    margin-bottom: 5px;
+.biodata p{
+    background-color: #94c2c4;
+    color: rgb(63, 63, 63);
+    text-align: left;
+    padding-left: 20px;
+    padding-bottom: 10px;
 }
 
-.input-container{
-    width: 650px;
-    background: white;
-    border: 2px solid #065f63;
-    border-radius: 12px;
-    overflow: hidden;
-    margin: 20px auto;
+h2{
+    margin: 0 0 10px 0;
+    font-size: 24px;
+    color: #333;
 }
-.input-container .box{
-    background: #eeeeee;
-    color: #8a8a8a;
-    text-align: center;
-    font-size: 22px;
-    font-weight: 600;
-    padding: 15px;
-    width: 100%;
-}
-
-.input-container form{
-    padding: 20px 30px;
-}
-
-.input-container label{
-    display: block;
-    margin-top: 15px;
-    margin-bottom: 8px;
-    color: #8a8a8a;
-    font-size: 18px;
-}
-
-.input-container input{
-    width: 100%;
-    padding: 14px;
-    border: 2px solid #065f63;
-    border-radius: 12px;
-    outline: none;
-    font-size: 15px;
-}
-.bukti{
-    width: 100%;
-    min-height: 160px;
-    border: 2px solid #065f63;
-    border-radius: 12px;
-    padding: 20px;
-    text-align: center;
-    margin-top: 10px;
-}
-
-.bukti img{
-    width: 100px;
-    display: none;
-    margin: auto;
+.tombol {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 24px;
+    background-color: #016267;
+    color: white;
+    border: none;
     border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    text-decoration: none;
 }
+
 .btn{
     text-align: center;
     margin-top: 25px;
 }
 
-.btn button{
+.btn .edit{
     width: 180px;
     padding: 12px;
     border: none;
@@ -265,6 +218,6 @@ body{
     cursor: pointer;
 }
 
-.btn button:hover{
+.btn .edit:hover{
     background-color: #04494c;
 }

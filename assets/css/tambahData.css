@@ -102,29 +102,6 @@ body{
     margin-top:8px;
 }
 
-/* Topbar */
-.topbar{
-    display:flex;
-    justify-content:flex-end;
-    align-items:center;
-    gap:25px;
-    margin-bottom:25px;
-    padding: 0 30px;
-    height: 60px;
-    border-bottom: 1px solid #ccc;
-}
-
-.topbar i{
-    font-size:20px;
-    color:gray;
-}
-
-.topbar img{
-    width:45px;
-    height:45px;
-    border-radius:50%;
-}
-
 /* Main */
 .main-content{
     flex:1;
@@ -175,7 +152,7 @@ body{
 }
 
 /* Judul bawaan form */
-.input-container::before{
+.tambah-data::before{
     content: "Form";
     display: block;
     width: 100%;
@@ -232,22 +209,47 @@ body{
     outline: none;
     font-size: 15px;
 }
-.bukti{
+.input-container select{
     width: 100%;
-    min-height: 160px;
+    padding: 14px;
     border: 2px solid #065f63;
     border-radius: 12px;
-    padding: 20px;
-    text-align: center;
-    margin-top: 10px;
+    outline: none;
+    font-size: 15px;
 }
 
-.bukti img{
-    width: 100px;
-    display: none;
-    margin: auto;
-    border-radius: 6px;
+/* Box fasilitas */
+.fasilitas-box{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    margin-top: 10px;
+    margin-bottom: 15px;
+    padding: 15px;
+    background: #f9f9f9;
+    border: 1px solid #cfd8dc;
+    border-radius: 10px;
 }
+
+/* Label checkbox */
+.fasilitas-box label{
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    color: #333;
+    cursor: pointer;
+    margin: 0;
+}
+
+/* Checkbox */
+.fasilitas-box input[type="checkbox"]{
+    width: 16px;
+    height: 16px;
+    accent-color: #065f63;
+    cursor: pointer;
+}
+
 .btn{
     text-align: center;
     margin-top: 25px;
